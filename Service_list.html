@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Frame2Brand — Video Production Services</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600&family=Space+Mono&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --black: #0a0a0a;
+    --charcoal: #141414;
+    --panel: #1a1a1a;
+    --border: #2a2a2a;
+    --gold: #f5c518;
+    --gold-dim: #b8920f;
+    --white: #f0ede8;
+    --muted: #888;
+    --red: #e63c3c;
+    --font-display: 'Bebas Neue', sans-serif;
+    --font-body: 'Inter', sans-serif;
+    --font-mono: 'Space Mono', monospace;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ── FILMSTRIP HEADER ── */
+  .filmstrip {
+    width: 100%;
+    background: var(--gold);
+    height: 22px;
+    display: flex;
+    align-items: center;
+    gap: 0;
+    overflow: hidden;
+    position: relative;
+  }
+  .filmstrip-holes {
+    display: flex;
+    width: 200%;
+    animation: crawl 6s linear infinite;
+  }
+  .hole {
+    width: 18px; height: 14px;
+    border-radius: 3px;
+    background: var(--black);
+    margin: 0 10px;
+    flex-shrink: 0;
+  }
+  @keyframes crawl { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 88vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 60px 24px 40px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 60% 55% at 50% 40%, #1a1200 0%, transparent 70%),
+                repeating-linear-gradient(0deg, transparent, transparent 40px, rgba(245,197,24,0.025) 40px, rgba(245,197,24,0.025) 41px),
+                repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(245,197,24,0.025) 40px, rgba(245,197,24,0.025) 41px);
+    pointer-events: none;
+  }
+  .hero-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    opacity: 0.8;
+  }
+  .hero h1 {
+    font-family: var(--font-display);
+    font-size: clamp(64px, 12vw, 130px);
+    line-height: 0.9;
+    color: var(--white);
+    letter-spacing: 2px;
+    position: relative;
+  }
+  .hero h1 span {
+    color: var(--gold);
+    display: block;
+  }
+  .hero-sub {
+    font-size: 15px;
+    color: var(--muted);
+    margin-top: 24px;
+    max-width: 500px;
+    font-weight: 300;
+    letter-spacing: 0.3px;
+  }
+  .hero-tagline {
+    margin-top: 36px;
+    display: inline-block;
+    border: 1px solid var(--gold);
+    padding: 10px 28px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+  .scroll-hint {
+    margin-top: 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    opacity: 0.4;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--white);
+  }
+  .scroll-line {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+    animation: pulse-line 2s ease-in-out infinite;
+  }
+  @keyframes pulse-line { 0%,100%{opacity:0.3} 50%{opacity:1} }
+
+  /* ── SECTION DIVIDER ── */
+  .divider {
+    width: 100%;
+    height: 1px;
+    background: var(--border);
+    position: relative;
+  }
+  .divider::after {
+    content: '◆';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    background: var(--black);
+    padding: 0 12px;
+    color: var(--gold);
+    font-size: 10px;
+  }
+
+  /* ── WHY CHOOSE ── */
+  .why-section {
+    padding: 80px 24px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .section-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 4px;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .why-section h2 {
+    font-family: var(--font-display);
+    font-size: clamp(36px, 6vw, 64px);
+    letter-spacing: 1px;
+    color: var(--white);
+    margin-bottom: 48px;
+    line-height: 1;
+  }
+  .why-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+  .why-card {
+    background: var(--charcoal);
+    padding: 32px 28px;
+  }
+  .why-icon {
+    font-size: 24px;
+    margin-bottom: 14px;
+    display: block;
+  }
+  .why-card h3 {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .why-card p {
+    font-size: 13.5px;
+    color: var(--muted);
+    line-height: 1.65;
+  }
+
+  /* ── SERVICES ── */
+  .services-section {
+    padding: 80px 24px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .services-section h2 {
+    font-family: var(--font-display);
+    font-size: clamp(36px, 6vw, 64px);
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+    line-height: 1;
+  }
+  .services-intro {
+    color: var(--muted);
+    font-size: 13.5px;
+    margin-bottom: 56px;
+    max-width: 520px;
+  }
+
+  /* SERVICE CARD */
+  .service-card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    margin-bottom: 2px;
+    overflow: hidden;
+    transition: border-color 0.3s;
+  }
+  .service-card:hover { border-color: var(--gold-dim); }
+
+  .service-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 28px 32px;
+    cursor: pointer;
+    gap: 20px;
+  }
+  .service-header:hover .service-title { color: var(--gold); }
+
+  .service-meta { display: flex; align-items: center; gap: 20px; flex: 1; min-width: 0; }
+  .service-number {
+    font-family: var(--font-display);
+    font-size: 40px;
+    color: var(--border);
+    line-height: 1;
+    flex-shrink: 0;
+    width: 44px;
+    transition: color 0.3s;
+  }
+  .service-card:hover .service-number { color: var(--gold-dim); }
+  .service-info { flex: 1; min-width: 0; }
+  .service-title {
+    font-family: var(--font-display);
+    font-size: clamp(22px, 4vw, 34px);
+    letter-spacing: 1px;
+    color: var(--white);
+    transition: color 0.3s;
+    line-height: 1.1;
+  }
+  .service-subtitle {
+    font-size: 11px;
+    color: var(--muted);
+    font-family: var(--font-mono);
+    letter-spacing: 1px;
+    margin-top: 4px;
+  }
+  .service-price {
+    font-family: var(--font-display);
+    font-size: 28px;
+    color: var(--gold);
+    flex-shrink: 0;
+    text-align: right;
+  }
+  .service-price small {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 9px;
+    color: var(--muted);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    line-height: 1.2;
+  }
+  .toggle-icon {
+    font-size: 18px;
+    color: var(--muted);
+    flex-shrink: 0;
+    transition: transform 0.3s;
+    margin-left: 16px;
+  }
+  .service-card.open .toggle-icon { transform: rotate(45deg); color: var(--gold); }
+
+  .service-body {
+    display: none;
+    border-top: 1px solid var(--border);
+    padding: 32px;
+    gap: 32px;
+  }
+  .service-card.open .service-body { display: flex; flex-wrap: wrap; }
+
+  .service-features {
+    flex: 1;
+    min-width: 240px;
+  }
+  .service-features ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .service-features li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 13.5px;
+    color: #bbb;
+  }
+  .service-features li::before {
+    content: '▸';
+    color: var(--gold);
+    flex-shrink: 0;
+    margin-top: 1px;
+    font-size: 11px;
+  }
+
+  /* DRIVE EMBED AREA */
+  .drive-embed {
+    flex: 1.4;
+    min-width: 280px;
+  }
+  .drive-embed-label {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 3px;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .drive-embed-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+  .embed-frame {
+    width: 100%;
+    aspect-ratio: 16/9;
+    background: #0d0d0d;
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 12px;
+    position: relative;
+    overflow: hidden;
+  }
+  .embed-frame iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
+  }
+  .embed-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+  .embed-play {
+    width: 52px; height: 52px;
+    border: 2px solid var(--gold);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--gold);
+    font-size: 18px;
+  }
+  .embed-cta {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--muted);
+    text-transform: uppercase;
+    text-align: center;
+  }
+  .drive-input-row {
+    display: flex;
+    gap: 8px;
+    margin-top: 10px;
+  }
+  .drive-input {
+    flex: 1;
+    background: #0d0d0d;
+    border: 1px solid var(--border);
+    color: var(--white);
+    padding: 8px 12px;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 1px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .drive-input:focus { border-color: var(--gold-dim); }
+  .drive-input::placeholder { color: #444; }
+  .drive-btn {
+    background: var(--gold);
+    color: var(--black);
+    border: none;
+    padding: 8px 16px;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .drive-btn:hover { background: var(--gold-dim); }
+
+  /* ── CLICKBAIT / OFFER ── */
+  .offer-section {
+    max-width: 900px;
+    margin: 0 auto 80px;
+    padding: 0 24px;
+  }
+  .offer-box {
+    border: 1px solid var(--gold);
+    padding: 48px 40px;
+    position: relative;
+    background: linear-gradient(135deg, rgba(245,197,24,0.04) 0%, transparent 60%);
+    text-align: center;
+  }
+  .offer-box::before {
+    content: 'LIMITED OFFER';
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--gold);
+    color: var(--black);
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 3px;
+    padding: 3px 16px;
+    font-weight: 700;
+  }
+  .offer-box h2 {
+    font-family: var(--font-display);
+    font-size: clamp(28px, 5vw, 52px);
+    letter-spacing: 1px;
+    color: var(--gold);
+    margin-bottom: 16px;
+    line-height: 1.1;
+  }
+  .offer-box p {
+    color: var(--muted);
+    font-size: 14px;
+    max-width: 480px;
+    margin: 0 auto 28px;
+    line-height: 1.7;
+  }
+  .offer-box p strong { color: var(--white); }
+  .offer-highlight {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: var(--gold);
+    border: 1px dashed var(--gold-dim);
+    padding: 10px 24px;
+    text-transform: uppercase;
+  }
+
+  /* ── TOOLS ROW ── */
+  .tools-section {
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 32px 24px;
+    text-align: center;
+    margin-bottom: 80px;
+  }
+  .tools-label {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 4px;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+  .tools-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+  }
+  .tool-tag {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    padding: 7px 18px;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--white);
+    text-transform: uppercase;
+  }
+
+  /* ── PRICING NOTE ── */
+  .pricing-note {
+    max-width: 700px;
+    margin: 0 auto 60px;
+    padding: 0 24px;
+    text-align: center;
+  }
+  .pricing-note p {
+    font-size: 12px;
+    color: #555;
+    font-family: var(--font-mono);
+    letter-spacing: 0.5px;
+    line-height: 1.8;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 32px 24px;
+    text-align: center;
+  }
+  .footer-brand {
+    font-family: var(--font-display);
+    font-size: 28px;
+    letter-spacing: 2px;
+    color: var(--gold);
+    margin-bottom: 6px;
+  }
+  .footer-tagline {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+  .filmstrip-bottom {
+    width: 100%;
+    background: var(--gold);
+    height: 22px;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    margin-top: 28px;
+  }
+  .filmstrip-holes-rev {
+    display: flex;
+    width: 200%;
+    animation: crawl-rev 6s linear infinite;
+  }
+  @keyframes crawl-rev { from { transform: translateX(-50%); } to { transform: translateX(0); } }
+
+  @media (max-width: 600px) {
+    .service-header { padding: 20px 18px; }
+    .service-body { padding: 20px 18px; }
+    .service-number { font-size: 28px; width: 32px; }
+    .offer-box { padding: 36px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- FILMSTRIP TOP -->
+<div class="filmstrip">
+  <div class="filmstrip-holes" id="holes-top"></div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <p class="hero-eyebrow">🎬 Official Service Proposal · 2025</p>
+  <h1>FRAME<span>2BRAND</span></h1>
+  <p class="hero-sub">We don't just edit videos — we craft brand identities through visual storytelling. Every frame is a decision. Every cut, intentional.</p>
+  <div class="hero-tagline">Digital Solutions · Madurai</div>
+  <div class="scroll-hint">
+    <div class="scroll-line"></div>
+    SCROLL
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services-section">
+  <p class="section-label">Our Services</p>
+  <h2>VIDEO PRODUCTION<br>PACKAGES</h2>
+  <p class="services-intro">Click any service to expand — view sample work directly from our portfolio, embedded below each package.</p>
+
+  <!-- SERVICE 1 -->
+  <div class="service-card" id="card-1">
+    <div class="service-header" onclick="toggleCard('card-1')">
+      <div class="service-meta">
+        <div class="service-number">01</div>
+        <div class="service-info">
+          <div class="service-title">REELS VIDEO EDITING</div>
+          <div class="service-subtitle">Professional Editing Package</div>
+        </div>
+      </div>
+      <div class="service-price">₹300<small>starting<br>from</small></div>
+      <div class="toggle-icon">+</div>
+    </div>
+    <div class="service-body">
+      <div class="service-features">
+        <ul>
+          <li>High-quality editing for Reels, Shorts & promotional videos</li>
+          <li>Smooth transitions & text animations</li>
+          <li>Color grading & visual enhancement</li>
+          <li>Music sync & audio balancing</li>
+          <li>Social-media-ready export formats</li>
+        </ul>
+      </div>
+      <div class="drive-embed">
+        <div class="drive-embed-label">Sample Work</div>
+        <div class="embed-frame" id="frame-1">
+          <iframe src="https://drive.google.com/file/d/1qaJjwj62t9UvBZ_gO6DbbK6Bjk563TT6/preview" allowfullscreen allow="autoplay"></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SERVICE 2 -->
+  <div class="service-card" id="card-2">
+    <div class="service-header" onclick="toggleCard('card-2')">
+      <div class="service-meta">
+        <div class="service-number">02</div>
+        <div class="service-info">
+          <div class="service-title">AI-POWERED REEL CREATION</div>
+          <div class="service-subtitle">AI Reel Production Package</div>
+        </div>
+      </div>
+      <div class="service-price">₹350<small>starting<br>from</small></div>
+      <div class="toggle-icon">+</div>
+    </div>
+    <div class="service-body">
+      <div class="service-features">
+        <ul>
+          <li>AI-generated visuals and animations</li>
+          <li>Voice-over integration (on request)</li>
+          <li>Social media optimized format</li>
+          <li>Script-to-visual pipeline</li>
+          <li>Fast turnaround with AI assistance</li>
+        </ul>
+      </div>
+      <div class="drive-embed">
+        <div class="drive-embed-label">Sample Work</div>
+        <div class="embed-frame" id="frame-1">
+          <iframe src="https://drive.google.com/file/d/1aQ11K0xXyO6kHkFRcnUU1ax6WjEJv5WG/preview" allowfullscreen allow="autoplay"></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SERVICE 3 -->
+  <div class="service-card" id="card-3">
+    <div class="service-header" onclick="toggleCard('card-3')">
+      <div class="service-meta">
+        <div class="service-number">03</div>
+        <div class="service-info">
+          <div class="service-title">iPHONE CINEMATIC SHOOT</div>
+          <div class="service-subtitle">Mobile Cinematography Package</div>
+        </div>
+      </div>
+      <div class="service-price">₹500<small>starting<br>from</small></div>
+      <div class="toggle-icon">+</div>
+    </div>
+    <div class="service-body">
+      <div class="service-features">
+        <ul>
+          <li>Professional shoot using iPhone</li>
+          <li>Stable footage with cinematic angles</li>
+          <li>Ideal for businesses, products & social content</li>
+          <li>Natural lighting setup & composition</li>
+          <li>Edited & delivered, ready to post</li>
+        </ul>
+      </div>
+      <div class="drive-embed">
+        <div class="drive-embed-label">Sample Work</div>
+        <div class="embed-frame" id="frame-1">
+          <iframe src="https://drive.google.com/file/d/1zKScE7DZaa-G_lasagmvKICvnIhnx4RB/preview" allowfullscreen allow="autoplay"></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SERVICE 4 -->
+  <div class="service-card" id="card-4">
+    <div class="service-header" onclick="toggleCard('card-4')">
+      <div class="service-meta">
+        <div class="service-number">04</div>
+        <div class="service-info">
+          <div class="service-title">PROFESSIONAL CAMERA SHOOT</div>
+          <div class="service-subtitle">Premium Video Production Package</div>
+        </div>
+      </div>
+      <div class="service-price">₹1,500<small>starting<br>from</small></div>
+      <div class="toggle-icon">+</div>
+    </div>
+    <div class="service-body">
+      <div class="service-features">
+        <ul>
+          <li>High-quality DSLR / mirrorless camera shoot</li>
+          <li>Professional framing & cinematic visuals</li>
+          <li>Suitable for ads, branding & promo campaigns</li>
+          <li>Color grade & post-production editing</li>
+          <li>Delivery in broadcast-quality resolution</li>
+        </ul>
+      </div>
+      <div class="drive-embed">
+        <div class="drive-embed-label">Sample Work</div>
+        <div class="embed-frame" id="frame-1">
+          <iframe src="https://drive.google.com/file/d/16QovhAsCwy5T1snaAGGedK-4kcm9ROOk/preview" allowfullscreen allow="autoplay"></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- WHY CHOOSE -->
+<section class="why-section">
+  <p class="section-label">Why Frame2Brand</p>
+  <h2>WE DON'T PUSH EDITS.<br>WE PUSH YOUR BRAND.</h2>
+  <div class="why-grid">
+    <div class="why-card">
+      <span class="why-icon">⏱</span>
+      <h3>On Your Timeline</h3>
+      <p>Delivery is structured around when you need it — not when it's convenient for us. You set the deadline, we hit it.</p>
+    </div>
+    <div class="why-card">
+      <span class="why-icon">🎯</span>
+      <h3>Client-First Creative</h3>
+      <p>Every creative decision is rooted in your brand. We study your identity before touching the timeline.</p>
+    </div>
+    <div class="why-card">
+      <span class="why-icon">🏷️</span>
+      <h3>Brand-Led Editing</h3>
+      <p>We specialize in branding. Edits are guided by your brand value — not templates, not trends.</p>
+    </div>
+    <div class="why-card">
+      <span class="why-icon">🛠</span>
+      <h3>Pro-Grade Software</h3>
+      <p>Premiere Pro · DaVinci Resolve · CapCut — industry-standard tools for every project tier.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- OFFER / CLICKBAIT -->
+<section class="offer-section" style="margin-top:80px;">
+  <div class="offer-box">
+    <h2>TRY BEFORE YOU PAY</h2>
+    <p>Send us your project brief. We deliver the work on time. <strong>You only pay if you love it.</strong> No upfront commitment. No risk. Just results.</p>
+    <div class="offer-highlight">🎬 First Delivery · See Results · Then Decide</div>
+  </div>
+</section>
+
+<!-- TOOLS -->
+<section class="tools-section">
+  <p class="tools-label">Software We Use</p>
+  <div class="tools-row">
+    <div class="tool-tag">⚡ Premiere Pro</div>
+    <div class="tool-tag">🎨 DaVinci Resolve</div>
+    <div class="tool-tag">📱 CapCut</div>
+    <div class="tool-tag">🤖 AI Generation</div>
+  </div>
+</section>
+
+<!-- PRICING NOTE -->
+<section class="pricing-note">
+  <p>* Prices shown are starting rates. Final pricing may vary based on project requirements, duration, complexity, shoot location, and deliverables. Contact us for a custom quote.</p>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">FRAME2BRAND</div>
+  <div class="footer-tagline">Digital Solutions · Transforming Ideas into Engaging Visual Stories 🎥✨</div>
+  <div class="filmstrip-bottom" style="margin-top:28px;">
+    <div class="filmstrip-holes-rev" id="holes-bottom"></div>
+  </div>
+</footer>
+
+<script>
+  // Generate filmstrip holes
+  function makeHoles(id) {
+    const el = document.getElementById(id);
+    for (let i = 0; i < 80; i++) {
+      const h = document.createElement('div');
+      h.className = 'hole';
+      el.appendChild(h);
+    }
+  }
+  makeHoles('holes-top');
+  makeHoles('holes-bottom');
+
+  // Toggle service cards
+  function toggleCard(id) {
+    const card = document.getElementById(id);
+    card.classList.toggle('open');
+  }
+
+  // Load Google Drive embed
+  function loadDrive(inputId, frameId) {
+    const raw = document.getElementById(inputId).value.trim();
+    const frame = document.getElementById(frameId);
+
+    if (!raw) return;
+
+    let embedUrl = '';
+
+    // Extract file ID from various Drive URL formats
+    const match = raw.match(/[-\w]{25,}/);
+    if (!match) {
+      alert('Could not parse the Drive link. Please use a standard Google Drive share URL.');
+      return;
+    }
+    const fileId = match[0];
+
+    // Determine if it's a folder or file
+    if (raw.includes('/folders/')) {
+      embedUrl = `https://drive.google.com/embeddedfolderview?id=${fileId}#list`;
+    } else {
+      embedUrl = `https://drive.google.com/file/d/${fileId}/preview`;
+    }
+
+    frame.innerHTML = `<iframe src="${embedUrl}" allowfullscreen allow="autoplay"></iframe>`;
+  }
+</script>
+</body>
+</html>
